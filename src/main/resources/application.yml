@@ -1,0 +1,15 @@
+# ログ設定
+logging:
+  level:
+    root: info
+    org.springframework.data.r2dbc: debug
+    io.r2dbc: debug
+    jp.joinsure.products.console: trace
+
+spring:
+  sql:
+    init:
+      mode: always
+      encoding: utf-8
+  r2dbc:
+    url: r2dbc:h2:mem:///testdb;DB_CLOSE_DELAY=-1
