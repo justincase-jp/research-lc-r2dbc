@@ -23,12 +23,12 @@ data class ProductGetResponse(
 )
 
 data class ProductDto(
-    val id: Long,
+    val id: UUID,
     val name: String,
     val base: BaseDto,
 )
 
 data class BaseDto(
-    val id: Long,
+    val id: UUID,
     val name: String,
 )

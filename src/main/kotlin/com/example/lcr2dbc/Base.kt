@@ -8,7 +8,7 @@ import java.util.*
 
 @Table
 data class Base(
-    @Id @GeneratedValue var id: Long?,
+    @Id @GeneratedValue(strategy = GeneratedValue.Strategy.RANDOM_UUID) var id: UUID?,
 //    val productId: UUID,
     var name: String,
     @ForeignKey var product: Product,

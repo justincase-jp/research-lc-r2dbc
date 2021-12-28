@@ -16,7 +16,7 @@ interface LcProductRepository : LcR2dbcRepository<Product, UUID> {
 //            .execute(lcClient).next()
 //    }
 //
-//    fun findAllProduct(): Flux<Product> {
+//    fun findProducts(): Flux<Product> {
 //        return SelectQuery
 //            .from(Product::class.java, "product")
 //            .join("product", "base", "base")

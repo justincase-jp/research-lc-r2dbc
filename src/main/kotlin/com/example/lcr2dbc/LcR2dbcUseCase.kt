@@ -2,6 +2,7 @@ package com.example.lcr2dbc
 
 import net.lecousin.reactive.data.relational.LcReactiveDataRelationalClient
 import net.lecousin.reactive.data.relational.model.LcEntityTypeInfo
+import net.lecousin.reactive.data.relational.query.SelectQuery
 import net.lecousin.reactive.data.relational.schema.SchemaBuilderFromEntities
 import org.springframework.stereotype.Component
 import reactor.core.publisher.Mono
@@ -34,20 +35,23 @@ class LcR2dbcUseCase(
                                 product = product,
                             )
                         ).flatMap {
-                            lcProductRepository.findAll().collectList().map {
-                                ProductGetResponse(
-                                    products = it.map { product ->
-                                        ProductDto(
-                                            id = product.id!!,
-                                            name = product.name,
-                                            base = BaseDto(
-                                                id = product.base!!.id!!,
-                                                name = product.base!!.name,
+                            SelectQuery
+                                .from(Product::class.java, "product")
+                                .join("product", "base", "base")
+                                .execute(lcClient).collectList().map {
+                                    ProductGetResponse(
+                                        products = it.map { product ->
+                                            ProductDto(
+                                                id = product.id!!,
+                                                name = product.name,
+                                                base = BaseDto(
+                                                    id = product.base!!.id!!,
+                                                    name = product.base!!.name,
+                                                )
                                             )
-                                        )
-                                    }
-                                )
-                            }
+                                        }
+                                    )
+                                }
                         }
                     }
             })

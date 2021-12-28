@@ -9,7 +9,7 @@ import java.util.*
 
 @Table
 data class Product(
-    @Id @GeneratedValue var id: Long?,
+    @Id @GeneratedValue(strategy = GeneratedValue.Strategy.RANDOM_UUID) var id: UUID?,
     var name: String,
 //    val term: List<String>,
 //    val isArbitraryTermConfigEnabled: Boolean,
